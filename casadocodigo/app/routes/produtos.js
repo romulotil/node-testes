@@ -1,12 +1,8 @@
+var conn = require('../../config/mysql');
+
 module.exports = function (app) {
     app.get('/produtos', (request, response) => {
-        var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '200459',
-            database: 'cdc_nodejs'
-        });
+        var connection = conn();
         
         connection.query('select * from livros', function (erro, resultado) {
             console.log(resultado);
@@ -18,5 +14,6 @@ module.exports = function (app) {
         
         connection.end();
     });
+
     return app;
 }
