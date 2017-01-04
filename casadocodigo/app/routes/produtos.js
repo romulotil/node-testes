@@ -1,8 +1,6 @@
-var conn = require('../../config/mysql');
-
 module.exports = function (app) {
     app.get('/produtos', (request, response) => {
-        var connection = conn();
+        var connection = app.infra.connectionFactory();
         
         connection.query('select * from livros', function (erro, resultado) {
             console.log(resultado);
