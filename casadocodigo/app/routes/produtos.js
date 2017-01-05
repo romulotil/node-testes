@@ -1,10 +1,9 @@
 module.exports = function (app) {
     app.get('/produtos', (request, response) => {
-        var connection = app.infra.connectionFactory();
+        var connection = new app.infra.connectionFactory();
+        var produtosBanco = new app.infra.ProdutosDao(connection);
         
-        connection.query('select * from livros', function (erro, resultado) {
-            console.log(resultado);
-
+        produtosBanco.lista(function (erro, resultado) {
             response.render('produtos/lista', {
                 lista: resultado
             });
